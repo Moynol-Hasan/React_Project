@@ -1,0 +1,101 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.container{
+  padding: 20px;
+  border: 1px solid rgb(47, 44, 44);
+  border-radius: 10px;
+  width: 500px;
+  display: flex;
+  /* justify-content: center; */
+  margin: 0 auto;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.initial-btn{
+  all: unset;
+  text-align: center;
+  font-size: large;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color:#273746;
+  color:white;
+  cursor: pointer;
+}
+
+.initial-btn:hover{
+
+  background-color:#E67E22;
+  transition: 0.4s;
+  color: black;
+
+}
+
+.form-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 20px;
+}
+
+.field{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: start;
+}
+
+input[type=text]{
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#types{
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.value-key{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+}
+
+
+.plus {
+  --b: 4px; /* the thickness */
+  width: 40px; /* the size */
+  aspect-ratio: 1;
+  border: 10px solid #000; /* the outer space */
+  /* background:
+    conic-gradient(from 90deg at var(--b) var(--b),#000 90deg,#fff 0) 
+    calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+    calc(50%  + var(--b))   calc(50%  + var(--b)); */
+  display: inline-block;
+  margin-left: 108%;
+  
+}
+
+.radius {
+  border-radius: 50%;
+}
+
+.InnerValKey{
+  display: flex;
+  gap: 35px;
+}
+
+.all-value-key{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+ul{
+  margin-top: -25px;
+}
