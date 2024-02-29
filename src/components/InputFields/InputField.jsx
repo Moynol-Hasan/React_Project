@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import SelectField from "./SelectField";
-import axios from "axios";
 
 const InputField = () => {
-  const url = "http://192.168.12.79:8080/api/products/create"
 
-  const [myVal,setMyval] = useState([]);
-
-  const [user, setUser] = useState({
+  let [user, setUser] = useState({
     label: "",
-    field_value:[],
+    field_slug: "",
+    field_value: "",
     field_type: "Text",
-    possible: [{}]
+    possible: [],
   });
 
+  const [myVal, setMyval] = useState([]);
   const [submitting, setSubmitting] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,36 +25,64 @@ const InputField = () => {
   };
 
   const handleFieldValueChange = (value) => {
-    setUser({ ...user, field_value: value });
+    const fieldValue =
+      Array.isArray(value) && value.length > 1 ? value : value[0] || "";
+    setUser({ ...user, field_value: fieldValue });
   };
 
-const handlePossibleValuesChange = (values) => {
-  const selectedValues = values.filter(({ isChecked }) => isChecked).map(({ value }) => value);
-  setUser((prevUser) => ({
-    ...prevUser,
-    field_value: selectedValues,
-    possible: values, // Update possible values as well
-  }));
-};
-  
+  const handlePossibleValuesChange = (values) => {
+    const selectedValues = values
+      .filter(({ isChecked }) => isChecked)
+      .map(({ key }) => key);
+    const selectedPossibleValues = values.map(({ key, value }) => ({
+      key,
+      value,
+    }));
+
+    setMyval(selectedValues);
+    setUser((prevUser) => ({
+      ...prevUser,
+      field_value: selectedValues,
+      possible: selectedPossibleValues,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     setSubmitting(true);
 
-    axios.post(url, user).then((res) => {
-      console.log(res);
-    });
+    let key = user.label;
+    key = key.replace(/ /g, "_");
 
+    const updatedUser = {
+      ...user,
+      field_slug: key,
+    };
+
+    console.log(updatedUser);
+
+    // Retrieve existing data from local storage
+    const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+
+    // Update the array with the new value
+    const updatedData = [...existingData, updatedUser];
+
+    // Store updated data in local storage
+    localStorage.setItem("userData", JSON.stringify(updatedData));
+
+    // localStorage.clear();
+
+    // Reset form fields and state
     setUser({
       label: "",
+      field_slug: "",
       field_value: "",
       field_type: "Text",
       possible: [],
     });
 
     setMyval([]);
+    setSubmit(true);
 
     setTimeout(() => {
       setSubmitting(false);
@@ -82,13 +109,16 @@ const handlePossibleValuesChange = (values) => {
           onFieldValueChange={handleFieldValueChange}
           onPossibleValuesChange={handlePossibleValuesChange}
           clearFieldValue={submitting}
+          onFormSubmit={submit}
+          // setFieldType={user.field_type}
         />
 
-      <div>
-          {/* Displaying myVal values as a list */}
-          <ul>
+        <div>
+          <ul className="selected-value">
             {myVal.map((value, index) => (
-              <li key={index}>{value}</li>
+              <li key={index}>{value}
+              {index !== myVal.length - 1 && ","}
+              </li>
             ))}
           </ul>
         </div>
@@ -102,14 +132,3 @@ const handlePossibleValuesChange = (values) => {
 };
 
 export default InputField;
-
-
-
-// const handlePossibleValuesChange = (values) => {
-//   const selectedValues = values.filter(({ isChecked }) => isChecked).map(({ value }) => value);
-//   setUser((prevUser) => ({
-//     ...prevUser,
-//     field_value: selectedValues,
-//     possible: values, // Update possible values as well
-//   }));
-// };

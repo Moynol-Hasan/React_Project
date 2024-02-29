@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FieldValues from "./FieldValus";
 import Modal from "./Modal";
 import KeyValue from "./KeyValue";
 
-const SelectField = ({ onValueTypeChange, onFieldValueChange, onPossibleValuesChange, clearFieldValue}) => {
+const SelectField = ({
+  onFormSubmit,
+  onValueTypeChange,
+  onFieldValueChange,
+  onPossibleValuesChange,
+  clearFieldValue,
+}) => {
   const [value, setValue] = useState("Text");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [initialValue, setInitialValue] = useState("Text");
+
+  useEffect(() => {
+    setInitialValue("Text");
+  }, []);
 
   const options = [
     { label: "Text", value: "Text" },
@@ -37,7 +49,12 @@ const SelectField = ({ onValueTypeChange, onFieldValueChange, onPossibleValuesCh
     <>
       <div className="field">
         <label htmlFor="types">Choose field type</label>
-        <select name="types" id="types" onChange={handleChange}>
+        <select
+          name="types"
+          id="types"
+          onChange={handleChange}
+          // value={onFormSubmit ? initialValue : value}
+        >
           {options.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}
@@ -50,13 +67,17 @@ const SelectField = ({ onValueTypeChange, onFieldValueChange, onPossibleValuesCh
         <FieldValues
           onFieldValueChange={onFieldValueChange}
           clearFieldValue={clearFieldValue}
+          sendValue={value}
         />
-      ) : <p>Selected Values: </p>}
+      ) : (
+        !onFormSubmit && <p>Selected Values: </p>
+      )}
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <KeyValue
           onClose={closeModal}
           onPossibleValuesChange={onPossibleValuesChange}
+          dropdownValue={value}
         />
       </Modal>
     </>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const FieldValus = ({ onFieldValueChange, clearFieldValue }) => {
+const FieldValus = ({ onFieldValueChange, clearFieldValue , sendValue}) => {
   const [fieldValue, setFieldValue] = useState("");
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    onFieldValueChange(value);
+    const valueArray = [value];
+    onFieldValueChange(valueArray);
     setFieldValue(value);
   };
 
@@ -20,7 +21,7 @@ const FieldValus = ({ onFieldValueChange, clearFieldValue }) => {
       <div className="field">
         <label>Field Value</label>
         <input
-          type="text"
+          type={sendValue}
           name="field_value"
           id="field_value"
           value={fieldValue}
