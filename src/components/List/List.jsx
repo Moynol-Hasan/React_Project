@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
+import Clear_Button from "../Button/Clear_Button";
 
 const List = () => {
   const [updatedUser, setUpdatedUser] = useState([]);
@@ -10,12 +11,17 @@ const List = () => {
       setUpdatedUser(storedUser);
     }
   }, []);
+  
 
   return (
     <>
       <Navbar />
       <h2 className="userDataCaption">User Data</h2>
-      <pre>{JSON.stringify(updatedUser, null, 2)}</pre>
+
+      <div className="json-list">
+        <pre>{JSON.stringify(updatedUser, null, 2)}</pre>
+        <Clear_Button />
+      </div>
     </>
   );
 };

@@ -177,3 +177,10 @@ input[type=text], input[type=password], input[type=number]{
 .possible-values{
   list-style: none;
 }
+
+.json-list
+{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
