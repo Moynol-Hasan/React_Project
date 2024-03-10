@@ -48,7 +48,7 @@ const Form = () => {
     const existingData = JSON.parse(localStorage.getItem("userData")) || [];
 
     // Concatenate existing data with current form data
-    const updatedData = existingData.concat(formData);
+    const updatedData = existingData.concat([formData]);
 
     // Store updated data in local storage as an array
     localStorage.setItem("userData", JSON.stringify(updatedData));

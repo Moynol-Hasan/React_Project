@@ -179,11 +179,17 @@ input[type=text], input[type=password], input[type=number]{
   list-style: none;
 }
 
-.json-list
-{
+.json-content{
   display: flex;
   justify-content: space-between;
   margin: 20px;
+}
+
+.json-list
+{
+  display: flex;
+  flex-direction: column;
+ 
 }
 
 .form-heading{

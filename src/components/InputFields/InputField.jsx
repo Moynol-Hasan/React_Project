@@ -58,7 +58,6 @@ const InputField = ({ index, updateFormData }) => {
 
   return (
     <div className="form-container">
-      <p className="form-heading">Form {index+1}</p>
       <div className="field">
         <label>Create Label</label>
         <input
