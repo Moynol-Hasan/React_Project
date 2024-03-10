@@ -69,8 +69,8 @@ const SelectField = ({
           clearFieldValue={clearFieldValue}
           sendValue={value}
         />
-      ) : (
-        !onFormSubmit && <p>Selected Values: </p>
+      ) :
+      (<p>Selected Values: </p>
       )}
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
