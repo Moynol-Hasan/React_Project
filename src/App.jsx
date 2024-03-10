@@ -1,7 +1,8 @@
 import "./App.css";
 import {BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
-import Button from "./components/Button/Button";
+import Form from "./components/InputFields/Form";
 import List from "./components/List/List"
+import InputField from './components/InputFields/InputField';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
      <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Button/>} />
+        <Route path="/" element={<Form/>} />
         <Route path="/List" element={<List/>} />
 
       </Routes>

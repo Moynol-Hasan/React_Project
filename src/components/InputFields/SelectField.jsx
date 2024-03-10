@@ -12,7 +12,6 @@ const SelectField = ({
 }) => {
   const [value, setValue] = useState("Text");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [initialValue, setInitialValue] = useState("Text");
 
   useEffect(() => {

@@ -39,6 +39,7 @@
 
 .form-container{
   margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -183,4 +184,10 @@ input[type=text], input[type=password], input[type=number]{
   display: flex;
   justify-content: space-between;
   margin: 20px;
+}
+
+.form-heading{
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
 }
