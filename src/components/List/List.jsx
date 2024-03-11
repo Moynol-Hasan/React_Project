@@ -24,15 +24,8 @@ const List = () => {
       <Navbar />
       <h2 className="userDataCaption">User Data</h2>
 
-      <div className="json-content">
       <div className="json-list">
-      {updatedUser.map((user, index) => (
-          <div key={index} className="jsonoutput">
-            <pre>{JSON.stringify(user, null, 2)}</pre>
-            <br /><br />
-          </div>
-        ))}
-      </div>
+        <pre>{JSON.stringify(updatedUser, null, 2)}</pre>
         <Clear_Button isClicked={click} />
       </div>
     </>

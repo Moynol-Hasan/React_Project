@@ -188,8 +188,8 @@ input[type=text], input[type=password], input[type=number]{
 .json-list
 {
   display: flex;
-  flex-direction: column;
- 
+  justify-content: space-between;
+  margin: 20px;
 }
 
 .form-heading{
