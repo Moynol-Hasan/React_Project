@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SelectField from "./SelectField";
 import InputField from "./InputField";
 import Navbar from "../Navbar/Navbar";
 
