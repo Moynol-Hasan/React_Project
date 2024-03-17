@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "./InputField";
 import Navbar from "../Navbar/Navbar";
 
 const Form = () => {
+  const url = "http://192.168.12.79:8088/products/all";
+
   const [count, setCount] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState([]);
@@ -21,58 +23,48 @@ const Form = () => {
       return newData;
     });
   };
-  // console.log(userData);
 
   const handleButtonClick = () => {
     setCount(count + 1);
   };
 
+  const deleteForm = (index) =>{
+    setFormData((prevData) => prevData.filter((_, i) => i !== index));
+    setCount((prevCount) => prevCount - 1);    
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
     setSubmitting(true);
-
-    console.log(formData);
-    //  let key = formData.label;
-    //  key = key.replace(/ /g, "_");
-
-    // const updatedUser = {
-    //   ...formData,
-    //   field_slug: key,
-    // };
-
-    // console.log(updatedUser);
-
+  
     // Retrieve existing data from local storage
     const existingData = JSON.parse(localStorage.getItem("userData")) || [];
-
-    // Concatenate existing data with current form data
-    const updatedData = existingData.concat([formData]);
-
-    // Store updated data in local storage as an array
+  
+    // Get the length of existing data to determine the new ID
+    const newId = existingData.length + 1;
+  
+    // Add the ID to the form data
+    const formWithId = {
+      id: newId,
+      data: formData,
+    };
+  
+    // Concatenate existing data with the new form data
+    const updatedData = existingData.concat(formWithId);
+  
+    // Store updated data in local storage
     localStorage.setItem("userData", JSON.stringify(updatedData));
-
-    // // localStorage.clear();
-    // setFormData([]);
-
-    window.location.reload(false);
-
-    // // Reset form fields and state
-    // setUser({
-    //   label: "",
-    //   field_slug: "",
-    //   field_value: "",
-    //   field_type: "Text",
-    //   possible: [],
-    // });
-
-    // setMyval([]);
-    // setSubmit(true);
-
+  
     setTimeout(() => {
       setSubmitting(false);
+      window.location.reload(false);
     }, 1000);
   };
+  
+
+  // axios.post(url)
+  // .then((response) => console.log(response))
+  // .catch((error) => console.log(error));
 
   return (
     <>
@@ -84,12 +76,13 @@ const Form = () => {
       </div>
 
       <form className="form-container container" onSubmit={handleSubmit}>
-        <InputField updateFormData={updateFormData} index={0} />
+        <InputField updateFormData={updateFormData} index={0}/>
         {[...Array(count)].map((_, index) => (
           <InputField
             key={index}
             updateFormData={updateFormData}
             index={index + 1}
+            deleteForm={deleteForm}
           />
         ))}
 

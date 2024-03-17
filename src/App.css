@@ -82,6 +82,17 @@ input[type=text], input[type=password], input[type=number]{
   padding: 0px 5px;
 }
 
+.delete-form-btn {
+  display: inline-block;
+  margin-left: 95%;
+  font-size: 22px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0px 5px;
+}
+
 .plus-btn {
   all: unset;
   display: inline-block;
@@ -101,6 +112,11 @@ input[type=text], input[type=password], input[type=number]{
 .cross-btn:hover{
   background-color: rgb(209, 215, 219);
 }
+
+.delete-form-btn:hover{
+  background-color: rgb(209, 215, 219);
+}
+
 
 .plus-btn:hover{
   transition: 0.4s;

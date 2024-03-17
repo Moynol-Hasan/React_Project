@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const FieldValus = ({ onFieldValueChange, clearFieldValue , sendValue}) => {
+  
   const [fieldValue, setFieldValue] = useState("");
 
   const handleInputChange = (e) => {

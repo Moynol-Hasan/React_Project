@@ -19,4 +19,3 @@ const Clear_Button = ({isClicked}) => {
 };
 
 export default Clear_Button;
-

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SelectField from "./SelectField";
 
-const InputField = ({ index, updateFormData }) => {
+const InputField = ({ index, updateFormData, deleteForm }) => {
   const [user, setUser] = useState({
     label: "",
     field_slug: "",
@@ -48,15 +48,15 @@ const InputField = ({ index, updateFormData }) => {
     updateFormData(index, user);
   }, [index,user]);
 
-  let key = user.label.replace(/ /g, "_");
+  const handleDeleteForm = ()=>{
+    deleteForm(index);
+  }
 
-  const updatedUser = {
-    ...user,
-    field_slug: key,
-  };
+
 
   return (
     <div className="form-container">
+      {index>0 ? <p className="delete-form-btn" onClick={handleDeleteForm}>&times;</p>:null}
       <div className="field">
         <label>Create Label</label>
         <input

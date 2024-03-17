@@ -52,7 +52,6 @@ const SelectField = ({
           name="types"
           id="types"
           onChange={handleChange}
-          // value={onFormSubmit ? initialValue : value}
         >
           {options.map((option, index) => (
             <option key={index} value={option.value}>
